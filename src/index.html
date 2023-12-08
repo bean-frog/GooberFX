@@ -1,0 +1,114 @@
+<html>
+<head>
+	<title>GooberFX: The industry laughingstock of sound cues</title>
+	<link rel="stylesheet" href="built.css">
+	<script src="../preload.js"></script> 
+  <script src="../renderer.js"></script>
+</head>
+<body>
+<div class="dark:bg-gray-800 dark:text-gray-100">
+
+  <header class="bg-emerald-500 text-white p-4 flex items-center">
+    <h1 class="text-2xl font-bold">GooberFX: <span class="text-sm">The industry laughingstock of sound cues</span></h1>
+  </header>
+  
+  <main class="p-4">
+  
+    <div class="flex flex-col">
+    
+      <button 
+        class="bg-emerald-500 text-white px-4 py-2 rounded self-start mb-4"
+        onclick="bomboclaat.showModal()">
+        Add New Cue
+      </button>
+      
+      <div class="flex flex-col space-y-2 overscroll-contain">
+
+
+
+        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded flex justify-between">
+          <div>
+            <h3 class="font-bold">Cue 1</h3>
+            <p class="text-xs text-gray-500">Filename.mp3</p>
+          </div>
+          <div class="flex space-x-4">
+            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+              Delete
+            </button>
+            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+              Edit Name
+            </button>
+            <select class="bg-gray-200 dark:bg-gray-600 text-black px-4 py-2 rounded">
+              <option>Filename.mp3</option>
+              <option>Filename2.mp3</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded flex justify-between">
+          <div>  
+            <h3 class="font-bold">Cue 2</h3>
+            <p class="text-xs text-gray-500">Filename2.mp3</p>
+          </div>
+          <div class="flex space-x-4">
+             <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+               Delete
+             </button>
+             <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+               Edit Name
+             </button>
+             <select class="bg-gray-200 dark:bg-gray-600 text-black px-4 py-2 rounded">
+               <option>Filename.mp3</option>
+               <option>Filename2.mp3</option>
+             </select>
+           </div>
+        </div>
+
+
+
+      </div>
+    
+    </div>
+
+  </main>
+  
+
+<dialog class="modal modal-box bg-base-100 text-base-content" id="bomboclaat">
+
+  <h2 class="text-lg font-bold">New Cue</h2>
+
+  <form class="py-4">
+
+    <div class="form-control w-full">
+      <label class="label"> 
+        <span class="label-text">Name</span>
+      </label> 
+      <input type="text" class="input input-bordered w-full"/>
+    </div>
+
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">Filename</span>  
+      </label>
+      <select class="select select-bordered w-full bg-base-200">
+        <option>Filename.mp3</option>  
+        <option>Filename2.mp3</option>
+      </select>
+    </div>
+    
+    <button class="btn btn-primary">Add Cue</button>
+  
+  </form>
+
+  <div class="modal-action">
+<form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn btn-outline">Close</button>
+      </form>
+  </div>
+
+</dialog>
+
+</div>
+</body>
+</html>
