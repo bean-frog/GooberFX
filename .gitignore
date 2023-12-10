@@ -1,3 +1,5 @@
 node_modules
 sounds/* 
+!/sounds/pipe.mp3
+!/sounds/gasp.mp3
 todo.txt

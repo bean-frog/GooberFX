@@ -49,7 +49,19 @@ ipcMain.on('getFilenames', (event, directoryPath) => {
     event.reply('filenames', { error: error.message });
   }
 });
+ipcMain.on('request-data', (event) => {
+  const filePath = path.join(__dirname, 'data.json');
 
+  fs.readFile(filePath, 'utf-8', (err, data) => {
+    if (err) {
+      console.error(err);
+      event.sender.send('data-response', { error: err.message });
+    } else {
+      const jsonData = JSON.parse(data);
+      event.sender.send('data-response', { data: jsonData });
+    }
+  });
+});
 
 
 
