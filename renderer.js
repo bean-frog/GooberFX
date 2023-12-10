@@ -15,14 +15,14 @@ async function getFilenames() {
   });
 }
 
-
+let cueData;
 ipcRenderer.send('request-data');
 
 ipcRenderer.on('data-response', (event, { error, data }) => {
-  const dataList = document.getElementById('data-list');
   if (error) {
     console.log('error:' + error);
   } else {
-    loadCues(data)
+    loadCues(data);
+    cueData = data;
   }
 });

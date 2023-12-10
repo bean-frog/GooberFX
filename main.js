@@ -64,4 +64,24 @@ ipcMain.on('request-data', (event) => {
 });
 
 
+ipcMain.on('update-data', (event, newData) => {
+  const filePath = path.join(__dirname, 'data.json');
 
+  try {
+    console.log(newData)
+    // Use JSON.stringify with indentation
+let stringData = JSON.stringify(newData)
+    // Write the file
+    fs.writeFile(filePath, stringData, 'utf-8', (err) => {
+      if (err) {
+        console.error(err);
+        event.sender.send('update-response', { error: err.message });
+      } else {
+        event.sender.send('update-response', { success: true });
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    event.sender.send('update-response', { error: error.message });
+  }
+});

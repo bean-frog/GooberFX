@@ -1,3 +1,32 @@
+const { ipcRenderer } = require('electron');
+async function getFilenames() {
+    return new Promise((resolve, reject) => {
+      ipcRenderer.send('getFilenames', '/sounds');
+  
+      ipcRenderer.on('filenames', (event, filenames) => {
+        if (filenames.error) {
+          reject(filenames.error);
+        } else {
+          resolve(filenames);
+        }
+      });
+    });
+  }
+  
+  let cueData;
+  ipcRenderer.send('request-data');
+  
+  ipcRenderer.on('data-response', (event, { error, data }) => {
+    if (error) {
+      console.log('error:' + error);
+    } else {
+      loadCues(data);
+      cueData = data;
+    }
+  });
+
+
+
 function highlightChannel(channel, on) {
     switch (on) {
         case true:
@@ -88,13 +117,28 @@ function clearAudio(channel) {
         audioElements[channelKey].pause();
         highlightChannel(channel, false);
         audioElements[channelKey].removeAttribute('src');
-        audioElements[channelKey] = null;
     }
 }
 
 
 function addCue(name, filename) {
-    console.log('name:' + name + ', path:' + filename)
+    console.log('name:' + name + ', path:' + filename);
+    let newCueObject = `
+    {
+        "name": "${name}",
+        "filepath": "${filename}"
+    }
+`;
+
+// Parse the JSON string and push the new object to cueData
+cueData.push(JSON.parse(newCueObject));
+
+// Log the updated cueData
+console.log(cueData);
+
+// Send the updated cueData to the main process
+ipcRenderer.send('update-data', cueData);
+
     let html = `
     <div class="flex justify-between p-4 bg-gray-100 rounded dark:bg-gray-700 draggable-card">
         <div class="flex items-center"> <!-- Added flex and items-center class -->
@@ -125,7 +169,10 @@ function addCue(name, filename) {
             
         </div>
         <div class="flex space-x-4">
-            <button class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">
+            <button class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
+            onclick="cueData = removeObjectFromArray(cueData, '${name}', '${filename}'); ipcRenderer.send('update-data', cueData); deleteCard(this, '${name}', '${filename}')"
+
+            >
                 Delete
             </button>
         </div>
@@ -134,6 +181,52 @@ function addCue(name, filename) {
 
     document.getElementById('cuelist').insertAdjacentHTML('beforeend', html)
 }
+
+function addCuesNoUpdate(name, filename) {
+    console.log('name:' + name + ', path:' + filename);
+
+    let html = /*html*/`
+    <div class="flex justify-between p-4 bg-gray-100 rounded dark:bg-gray-700 draggable-card">
+        <div class="flex items-center"> 
+            <div>
+                <h3 contenteditable class="font-bold">${name}</h3>
+                <p class="text-xs text-gray-500">${filename}</p>
+            </div>
+            <button 
+                class="channelwrapper-1 px-4 py-2 ml-4 text-white bg-sky-500 rounded hover:scale-[1.01] hover:shadow-md active:scale-95"
+                onclick="playAudio('${filename}', 1)">
+                Play (Ch. 1)
+            </button>
+            <button 
+                class="channelwrapper-2 px-4 py-2 ml-4 text-white bg-sky-500 rounded hover:scale-[1.01] hover:shadow-md active:scale-95"
+                onclick="playAudio('${filename}', 2)">
+                Play (Ch. 2)
+            </button>
+            <button 
+                class="channelwrapper-3 px-4 py-2 ml-4 text-white bg-sky-500 rounded hover:scale-[1.01] hover:shadow-md active:scale-95"
+                onclick="playAudio('${filename}', 3)">
+                Play (Ch. 3)
+            </button>
+            <button 
+                class="channelwrapper-4 px-4 py-2 ml-4 text-white bg-sky-500 rounded hover:scale-[1.01] hover:shadow-md active:scale-95"
+                onclick="playAudio('${filename}', 4)">
+                Play (Ch. 4)
+            </button>
+            
+        </div>
+        <div class="flex space-x-4">
+            <button class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
+            onclick="cueData = removeObjectFromArray(cueData, '${name}', '${filename}'); ipcRenderer.send('update-data', cueData); deleteCard(this, '${name}', '${filename}')"
+            >
+                Delete
+            </button>
+        </div>
+    </div>
+`
+
+    document.getElementById('cuelist').insertAdjacentHTML('beforeend', html)
+}
+
 function specialAudio(fullpath, channel) {
     var channelKey = 'channel' + channel;
     var containerClass = 'channel-' + channel;
@@ -175,6 +268,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function loadCues(data) {
     data.forEach(function(entry) {
-        addCue(entry.name, entry.filepath);
+        addCuesNoUpdate(entry.name, entry.filepath);
       });
+}
+
+function removeObjectFromArray(array, name, filepath) {
+    array = array.filter(obj => obj.name !== name || obj.filepath !== filepath);
+    return array;
+  }
+  function deleteCard(button, name, filename) {
+    // Find the parent card element
+    const card = button.closest('.draggable-card');
+
+    // Check if the card exists before attempting to remove it
+    if (card) {
+        // Remove the card from the DOM
+        card.remove();
+
+        // Additionally, you can perform any other actions or logic here
+        // For example, updating your data or notifying the backend
+        cueData = removeObjectFromArray(cueData, name, filename);
+        ipcRenderer.send('update-data', cueData);
+    }
 }

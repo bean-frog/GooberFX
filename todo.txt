@@ -1,2 +1,1 @@
--make delete button work
--edit config
+nothin
