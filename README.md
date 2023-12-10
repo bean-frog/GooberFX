@@ -12,3 +12,4 @@ written and tested on Linux, probably works on mac or windows because electron
  - run npm install
  - run npm run start
  - uhhhhh enjoy the worst app ever created
+ - put any files you want to use in the ./sounds folder btw (if its not there just make one and make sure its in the project root)
