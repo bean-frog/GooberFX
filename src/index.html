@@ -13,38 +13,73 @@
   </header>
   
   <main class="p-4">
-    <div id="audio-container" class="flex flex-row p-2 m-2 space-x-2"></div>
 
     <div class="flex flex-col">
-      <div class="flex flex-row space-x-2">
-        
-        <button 
-          class="self-start px-4 py-2 mb-4 text-white bg-emerald-500 rounded hover:scale-[1.01] hover:shadow-md"
-          onclick="pauseAudio(1)">
-          Stop Channel 1
-        </button>
-        <button 
-          class="self-start px-4 py-2 mb-4 text-white bg-emerald-500 rounded hover:scale-[1.01] hover:shadow-md"
-          onclick="pauseAudio(2)">
-          Stop Channel 2
-        </button>
-        <button 
-          class="self-start px-4 py-2 mb-4 text-white bg-emerald-500 rounded hover:scale-[1.01] hover:shadow-md"
-          onclick="pauseAudio(3)">
-          Stop Channel 3
-        </button>
-        <button 
-          class="self-start px-4 py-2 mb-4 text-white bg-emerald-500 rounded hover:scale-[1.01] hover:shadow-md"
-          onclick="pauseAudio(4)">
-          Stop Channel 4
-        </button>
+
+
+
+      <div class="flex flex-row pb-4 space-x-2">
+
+        <div class="flex flex-col justify-between items-center p-4 h-full" style="background-color: #1d232a;">
+          <h1 class="text-lg text-white">Channel 1</h1>
+          <div class="channel-1"style="width:300px !important"></div>
+          <button 
+              class="self-center px-4 py-2 mb-4 text-white bg-red-500 rounded hover:scale-[1.01] hover:shadow-md active:scale-95"
+              onclick="pauseAudio(1)">
+              Stop
+          </button>
       </div>
-      <div class="flex flex-row">
+      
+
+        <div class="flex flex-col justify-center items-center p-4" style="background-color: #1d232a;">
+          <h1 class="text-lg text-white">Channel 2</h1>
+          <div class="channel-2"style="width:300px !important"></div>
+          <button 
+          class="self-center px-4 py-2 mb-4 text-white bg-red-500 rounded hover:scale-[1.01] hover:shadow-md active:scale-95"
+          onclick="pauseAudio(2)">
+          Stop
+        </button>
+        </div>
+       
+        <div class="flex flex-col justify-center items-center p-4" style="background-color: #1d232a;">
+          <h1 class="text-lg text-white">Channel 3</h1>
+          <div class="channel-3"style="width:300px !important"></div>
+          <button 
+          class="self-center px-4 py-2 mb-4 text-white bg-red-500 rounded hover:scale-[1.01] hover:shadow-md active:scale-95"
+          onclick="pauseAudio(3)">
+          Stop
+        </button>
+        </div>
+       
+        <div class="flex flex-col justify-center items-center p-4" style="background-color: #1d232a;">
+          <h1 class="text-lg text-white">Channel 4</h1>
+          <div class="channel-4"style="width:300px !important"></div>
+          <button 
+          class="self-center px-4 py-2 mb-4 text-white bg-red-500 rounded hover:scale-[1.01] hover:shadow-md active:scale-95"
+          onclick="pauseAudio(4)">
+          Stop
+        </button>
+        </div>
+       
+
+
+
+      </div>
+
+
+
+
+      <div class="flex flex-row space-x-2">
         <button 
-          class="self-start px-4 py-2 mb-4 text-white bg-emerald-500 rounded hover:scale-[1.01] hover:shadow-md"
+          class="self-start px-4 py-2 mb-4 text-white bg-emerald-500 rounded hover:scale-[1.01] hover:shadow-md active:scale-95"
           onclick="bomboclaat.showModal()">
           Add New Cue
         </button>
+        <button 
+        class="self-start px-4 py-2 mb-4 text-white bg-red-500 rounded hover:scale-[1.01] hover:shadow-md active:scale-95"
+        onclick="pauseAudio(1); pauseAudio(2); pauseAudio(3); pauseAudio(4); ">
+        Stop All
+      </button>
       </div>
       <div id="cuelist" class="flex overscroll-contain flex-col space-y-2">
       </div>
@@ -76,14 +111,14 @@
       </select>
       <button 
       id="updateList"
-      class="self-start px-4 py-2 my-2 mb-4 text-white bg-emerald-500 rounded"
+      class="self-start px-4 py-2 my-2 mb-4 text-white bg-emerald-500 rounded  hover:scale-[1.01] hover:shadow-md active:scale-95"
       onclick="event.preventDefault();"
      >
      Update Sound Files
     </button>
     </div>
     
-    <button class="btn btn-primary" onclick="event.preventDefault(); addCue(document.getElementById('newname').value, document.getElementById('fileselect').value)">Add Cue</button>
+    <button class="self-start px-4 py-2 my-2 mb-4 text-white bg-emerald-500 rounded  hover:scale-[1.01] hover:shadow-md active:scale-95" onclick="event.preventDefault(); addCue(document.getElementById('newname').value, document.getElementById('fileselect').value)">Add Cue</button>
   
   </form>
 
