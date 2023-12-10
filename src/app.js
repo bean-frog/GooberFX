@@ -26,32 +26,20 @@ function updateSelectOptions() {
     });
   });
 }
-
-
 document.getElementById('updateList').addEventListener('click', fetchData);
 var audioElements = {};
-
-// Get references to the 4 audio elements
 for (var i = 1; i <= 4; i++) {
     audioElements[i] = document.getElementById('audio-' + i);
 }
-
 function playAudio(filename, channel) {
     var channelKey = 'channel' + channel;
     var containerClass = 'channel-' + channel;
-
     if (!audioElements[channelKey]) {
         audioElements[channelKey] = document.createElement('audio');
         audioElements[channelKey].setAttribute('controls', true);
-        
-        // Set the width of the audio element to 300px
-        audioElements[channelKey].style.width = '300px';
+                audioElements[channelKey].style.width = '300px';
         audioElements[channelKey].classList.add('m-4', 'self-center')
-
-        // Get reference to the container element
         var containerElement = document.querySelector('.' + containerClass);
-
-        // Check if the container element exists
         if (containerElement) {
             containerElement.appendChild(audioElements[channelKey]); // Append to the container element
         } else {
