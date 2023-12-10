@@ -1,4 +1,2 @@
-- json saving/loading
-- add cue based on id in json
-- delete cue based on id in json
-- populate all dropdowns (by class) with available files
+-make delete button work
+-edit config
