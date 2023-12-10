@@ -129,18 +129,12 @@ function addCue(name, filename) {
         "filepath": "${filename}"
     }
 `;
-
-// Parse the JSON string and push the new object to cueData
 cueData.push(JSON.parse(newCueObject));
-
-// Log the updated cueData
 console.log(cueData);
-
-// Send the updated cueData to the main process
 ipcRenderer.send('update-data', cueData);
 
     let html = `
-    <div class="flex justify-between p-4 bg-gray-100 rounded dark:bg-gray-700 draggable-card">
+    <div class="flex justify-between p-4 bg-gray-700 rounded draggable-card">
         <div class="flex items-center"> <!-- Added flex and items-center class -->
             <div>
                 <h3 contenteditable class="font-bold">${name}</h3>
@@ -186,7 +180,7 @@ function addCuesNoUpdate(name, filename) {
     console.log('name:' + name + ', path:' + filename);
 
     let html = /*html*/`
-    <div class="flex justify-between p-4 bg-gray-100 rounded dark:bg-gray-700 draggable-card">
+    <div class="flex justify-between p-4 bg-gray-700 rounded draggable-card">
         <div class="flex items-center"> 
             <div>
                 <h3 contenteditable class="font-bold">${name}</h3>
@@ -277,16 +271,9 @@ function removeObjectFromArray(array, name, filepath) {
     return array;
   }
   function deleteCard(button, name, filename) {
-    // Find the parent card element
     const card = button.closest('.draggable-card');
-
-    // Check if the card exists before attempting to remove it
     if (card) {
-        // Remove the card from the DOM
         card.remove();
-
-        // Additionally, you can perform any other actions or logic here
-        // For example, updating your data or notifying the backend
         cueData = removeObjectFromArray(cueData, name, filename);
         ipcRenderer.send('update-data', cueData);
     }
