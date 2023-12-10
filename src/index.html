@@ -6,19 +6,17 @@
   <script src="../renderer.js"></script>
 </head>
 <body style="background-color: #1d232a;">
-<div class="text-gray-100 bg-gray-800">
+  <div class="flex flex-col h-screen text-gray-100 bg-gray-800">
 
-  <header class="flex items-center p-4 text-white bg-emerald-500">
-    <h1 class="text-2xl font-bold">GooberFX: <span class="text-sm">The industry <span class="line-through">standard</span> laughingstock of sound cue software</span></h1>
-  </header>
-  
-  <main class="p-4">
+    <header class="flex items-center p-4 text-white bg-emerald-500">
+      <h1 class="text-2xl font-bold">GooberFX: <span class="text-sm">The industry <span class="line-through">standard</span> laughingstock of sound cue software</span></h1>
+    </header>
+    
+    <main class="overflow-hidden flex-1 p-4">
 
-    <div class="flex flex-col">
+      <div class="flex overflow-hidden flex-col h-full">
 
-
-
-      <div class="flex flex-row pb-4 space-x-2">
+        <div class="grid grid-cols-4 gap-2 mb-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2">
 
         <div class="flex flex-col justify-between items-center p-4 h-full" style="background-color: #1d232a;">
           <h1 class="text-lg text-white">Channel 1</h1>
@@ -80,8 +78,13 @@
         onclick="pauseAudio(1); pauseAudio(2); pauseAudio(3); pauseAudio(4); ">
         Stop All
       </button>
+      <button 
+        class="self-start px-4 py-2 mb-4 text-white bg-sky-500 rounded hover:scale-[1.01] hover:shadow-md active:scale-95"
+        onclick="calibration()">
+        Calibration Sweep
+      </button>
       </div>
-      <div id="cuelist" class="flex overscroll-contain flex-col space-y-2">
+      <div id="cuelist" class="flex overflow-y-auto overscroll-contain flex-col space-y-2">
       </div>
     </div>
   

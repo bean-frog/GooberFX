@@ -30,6 +30,13 @@ app.whenReady().then(() => {
   });
 });
 
+if (!fs.existsSync('./sounds')) {
+  fs.mkdirSync('./sounds');
+  console.log('The "sounds" folder has been created.');
+} else {
+  console.log('The "sounds" folder already exists.');
+}
+
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit();
 });
