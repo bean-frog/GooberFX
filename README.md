@@ -17,6 +17,6 @@ written and tested on Linux, probably works on mac or windows because electron
 
 ## Screenshots
 #### No cues added yet:
-![screenshot of the gooberfx interface with no cues added](https://github.com/bean-frog/GooberFX/tree/main/readmeimgs/nocues.png)
+![screenshot of the gooberfx interface with no cues added](https://github.com/bean-frog/GooberFX/blob/main/readmeimgs/nocues.png?raw=true)
 #### A few cues added:
-![screenshot of the gooberfx interface with some cues](https://github.com/bean-frog/GooberFX/tree/main/readmeimgs/somecues.png)
+![screenshot of the gooberfx interface with some cues](https://github.com/bean-frog/GooberFX/blob/main/readmeimgs/somecues.png?raw=true)
