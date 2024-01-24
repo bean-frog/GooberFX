@@ -14,3 +14,5 @@ written and tested on Linux, probably works on mac or windows because electron
  - uhhhhh enjoy the worst app ever created
  - put any files you want to use in the ./sounds folder btw
  - data.json stores the cues, you can edit it manually just make sure the formatting is correct
+
+## Screenshots
